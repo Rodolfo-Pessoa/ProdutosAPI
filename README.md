@@ -11,7 +11,18 @@
 - Acessar o site: https://start.spring.io/
 - Selecionar as dependências:
   
-    - Lombok
+    - Lombok:
+      
+          -> serve para reduzir a verbosidade do código
+      
+          -> eliminando a necessidade de escrever códigos repeitivo:
+      
+          - getters;
+          - setters
+          - construtores;
+          - toString()
+          - equals()
+      
     - Spring Web
     - Spring dev tools
     - Spring Data JPA
