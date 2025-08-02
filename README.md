@@ -3,7 +3,6 @@
 ## Objetivo:
 - Criar uma API REST com Spring Boot
 - Implementar o CRUD
-- Implementar o Swagger para documentação da API
 - Implementar o banco de dados H2
 
 ---
