@@ -19,8 +19,10 @@
     - H2 Database
 
 <img src="https://i.imgur.com/eMPmyvD.png" alt="Spring_initilizr" width="720">
+
 ---
 ## Passo 2: Criar o model
+
 ### No exemplo vamos usar um model de produtos:
 
 POJO  (Plain Old Java Object):
@@ -124,30 +126,24 @@ Dessa forma já conseguimos acessar o banco de dados h2 no navegador, com a url:
     -  @Id, que diz para o java que essa variável é a chave primária da tabela.
     -  @GeneratedValue, que diz para o java que essa variável é gerada automaticamente pelo banco de dados.
     -  @Column(name="..."), que diz para o java que essa variável é uma coluna da tabela e podemos mudar o nome da coluna.
-      -  @NotNull, que diz para o java que essa variável não pode ser nula.
-    
-      //POJO -> Plain old Java Object
-  (...)
-      @Entity
+    -  @NotNull, que diz para o java que essa variável não pode ser nula.
+
+- Annotations:
+
+      @Entity 
       @Table(name = "produto")
       public class Produto {
   
       @Id
       @Column(name = "id")
       private String id;
-  
-      @Column(name = "nome")
-      private String nome;
-  
       @Column(name = "descricao")
       private String descricao;
-  
+      
       @Column(name = "preco")
       private Double preco;
- (...)
-  
-     Com o data.sql criado, podemos rodar a aplicação e, caso nao tenha nenhum erro, veremos que a tabela foi criada no banco de dados.
+
+
+Com o data.sql criado, podemos rodar a aplicação e, caso nao tenha nenhum erro, veremos que a tabela foi criada no banco de dados.
 
 <img src="https://i.imgur.com/SZxeOek.png" alt="H2_console_produtos" width="750"/>
-
----
