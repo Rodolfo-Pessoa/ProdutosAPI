@@ -144,15 +144,15 @@ Dessa forma já conseguimos acessar o banco de dados h2 no navegador, com a url:
       @Table(name = "produto")
       public class Produto {
   
-      @Id
-      @Column(name = "id")
-      private String id;
+        @Id
+        @Column(name = "id")
+        private String id;
   
-      @Column(name = "descricao")
-      private String descricao;
+        @Column(name = "descricao")
+        private String descricao;
       
-      @Column(name = "preco")
-      private Double preco;
+        @Column(name = "preco")
+        private Double preco;
 
 
 Com o data.sql criado, podemos rodar a aplicação e, caso nao tenha nenhum erro, veremos que a tabela foi criada no banco de dados.
