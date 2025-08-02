@@ -126,73 +126,28 @@ Dessa forma já conseguimos acessar o banco de dados h2 no navegador, com a url:
     -  @Column(name="..."), que diz para o java que essa variável é uma coluna da tabela e podemos mudar o nome da coluna.
       -  @NotNull, que diz para o java que essa variável não pode ser nula.
     
-
-    //POJO -> Plain old Java Object
-
-    @Entity
-    @Table(name = "produto")
-    public class Produto {
-
-    @Id
-    @Column(name = "id")
-    private String id;
-
-    @Column(name = "nome")
-    private String nome;
-
-    @Column(name = "descricao")
-    private String descricao;
-
-    @Column(name = "preco")
-    private Double preco;
-
-    @Override
-    public String toString() {
-        return "Produto{" +
-                "descricao='" + descricao + '\'' +
-                ", id='" + id + '\'' +
-                ", nome='" + nome + '\'' +
-                ", preco=" + preco +
-                '}';
-    }
-
-    public String getDescricao() {
-        return descricao;
-    }
-
-    public void setDescricao(String descricao) {
-        this.descricao = descricao;
-    }
-
-    public String getId() {
-        return id;
-    }
-
-    public void setId(String id) {
-        this.id = id;
-    }
-
-    public String getNome() {
-        return nome;
-    }
-
-    public void setNome(String nome) {
-        this.nome = nome;
-    }
-
-    public Double getPreco() {
-        return preco;
-    }
-
-    public void setPreco(Double preco) {
-        this.preco = preco;
-        }
-    }
-
-
-Com o data.sql criado, podemos rodar a aplicação e, caso nao tenha nenhum erro, veremos que a tabela foi criada no banco de dados.
+      //POJO -> Plain old Java Object
+  (...)
+      @Entity
+      @Table(name = "produto")
+      public class Produto {
+  
+      @Id
+      @Column(name = "id")
+      private String id;
+  
+      @Column(name = "nome")
+      private String nome;
+  
+      @Column(name = "descricao")
+      private String descricao;
+  
+      @Column(name = "preco")
+      private Double preco;
+ (...)
+  
+     Com o data.sql criado, podemos rodar a aplicação e, caso nao tenha nenhum erro, veremos que a tabela foi criada no banco de dados.
 
 <img src="https://i.imgur.com/SZxeOek.png" alt="H2_console_produtos" width="750"/>
 
 ---
-## Passo 6: Cri
