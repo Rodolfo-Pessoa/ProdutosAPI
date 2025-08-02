@@ -147,6 +147,7 @@ Dessa forma já conseguimos acessar o banco de dados h2 no navegador, com a url:
       @Id
       @Column(name = "id")
       private String id;
+  
       @Column(name = "descricao")
       private String descricao;
       
