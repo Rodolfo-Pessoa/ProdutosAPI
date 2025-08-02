@@ -140,6 +140,7 @@ Dessa forma já conseguimos acessar o banco de dados h2 no navegador, com a url:
 
 - Annotations:
 
+      (...)
       @Entity 
       @Table(name = "produto")
       public class Produto {
@@ -153,6 +154,7 @@ Dessa forma já conseguimos acessar o banco de dados h2 no navegador, com a url:
       
         @Column(name = "preco")
         private Double preco;
+       (...)
 
 
 Com o data.sql criado, podemos rodar a aplicação e, caso nao tenha nenhum erro, veremos que a tabela foi criada no banco de dados.
