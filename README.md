@@ -232,6 +232,17 @@ Assim, quando subimos a aplicação e fazemos uma requisição POST para a rota 
   http://localhost:8080/produtos/966c6149-3b92-41f0-b812-5bcf1c45
 
 ---
+## Passo 9: Criar o método delete
 
+    @DeleteMapping("/{id}")
+    public void deletar(@PathVariable("id") String id) {
+    produtoRepository.deleteById(id);
+    }
+Além disso, criar uma nova Request no postman, nesse caso será uma requisição DELETE para a rota /produtos/{id}:
+
+<img src="https://i.imgur.com/qdrKhTe.png" alt="delete_postman" width="750"/>
+
+---
+## Passo 
 
      
