@@ -21,7 +21,7 @@
 <img src="https://i.imgur.com/eMPmyvD.png" alt="Spring_initilizr" width="720">
 
 ---
-## Passo 2: Criar o model
+## Passo 2: Criar o model (modelo de negócio)
 
 ### No exemplo vamos usar um model de produtos:
 
@@ -32,7 +32,7 @@ POJO  (Plain Old Java Object):
 - Implementar o toString
 ---
 
-## Passo 3: Criar a classe controller
+## Passo 3: Criar a classe controller (é a API)
 1. Colocar a anotação **@RestController**
 
    - Essa annotation diz para o java que essa classe é um controller e que ela vai **retornar** um JSON,
@@ -148,3 +148,90 @@ Dessa forma já conseguimos acessar o banco de dados h2 no navegador, com a url:
 Com o data.sql criado, podemos rodar a aplicação e, caso nao tenha nenhum erro, veremos que a tabela foi criada no banco de dados.
 
 <img src="https://i.imgur.com/SZxeOek.png" alt="H2_console_produtos" width="750"/>
+---
+## Passo 6: Criar o repositório (comunicação com o banco de dados)
+
+- Essa interface é responsável por fazer a comunicação com o banco de dados.
+- Criar a interface ProdutoRepository que extende JpaRepository<Produto, String>
+
+      public interface ProdutoRepository extends JpaRepository<Produto, String> {
+      }
+
+- O JpaRepository<Produto, String> é uma interface do Spring Data JPA que fornece métodos para realizar operações CRUD (Create, Read, Update, Delete) em uma entidade.
+
+- O JpaRepository<Produto, String> recebe dois parâmetros:
+    - O primeiro é a entidade que queremos persistir no banco de dados.
+    - O segundo é o tipo da chave primária da entidade, como o ID está sendo representado por uma String, o segundo parâmetro será String.
+    - Ficando então: <Produto, String>
+
+---
+## Passo 7: Injetar a classe repository no controller
+
+1. Injetar a classe ProdutoRepository no controller:
+
+          @Autowired
+          private ProdutoRepository produtoRepository;
+
+2. Criar o construtor desse repository:
+
+        public ProdutoController(ProdutoRepository produtoRepository) {
+        this.produtoRepository = produtoRepository;
+        }
+3. O próximo passo é implementar a instância do repository no método dentro do controller.
+    
+   Que ficará dessa forma:
+
+           @PostMapping
+           public Produto salvar(@RequestBody Produto produto) {
+           System.out.println("Produto recebido: " + produto);
+           String id = UUID.randomUUID().toString();
+
+           produto.setId(id);
+        
+           produtoRepository.save(produto);
+           return produto;
+       }
+String id = UUID.randomUUID().toString(); -> Gera um id aleatório para o produto.
+    
+- Como colocamos que o ID no BD é NOTNULL, precisamos atribuir um id para o produto.
+- O UUID.randomUUID().toString() gera um id aleatório e o toString() converte para String.
+
+produto.setId(id); -> Seta o id gerado no produto.
+
+repository.save(produto); -> Salva o produto no banco de dados.
+
+Assim, quando subimos a aplicação e fazemos uma requisição POST para a rota /produtos, o produto será salvo no banco de dados e retornará um JSON com um ID aleatório:
+
+    {
+    "id": "966c6149-3b92-41f0-b812-5bcf1c459a71",
+    "nome": "Pendrve",
+    "descricao": "Kingston 1TB",
+    "preco": 50.0
+    }
+
+---
+## Passo 8: Criar um endpoint e um método para retornar os dados do produto
+
+- 8.1 Retornar os dados do produto pelo ID:
+
+      @GetMapping("/{id}")
+      public Produto obterPorId(@PathVariable("id") String id) {
+      return produtoRepository.findById(id).orElse(null);
+      }
+
+  - Obter o ID da URL com @PathVariable("id") String id
+  - Retornar o produto pelo ID com produtoRepository.findById(id).orElse(null);
+  - O orElse(null) é para retornar null caso o produto não seja encontrado.
+
+- 8.2 Criar uma nova Request no postman, nesse caso será uma requisição GET para a rota /produtos/{id}:
+
+<img src="https://i.imgur.com/ulSXcpk.png" alt="getById_postman" width="750"/>
+
+- 8.3 Testar a requisição GET para a rota /produtos/{id}:
+
+  http://localhost:8080/produtos/966c6149-3b92-41f0-b812-5bcf1c45
+
+---
+
+
+     
