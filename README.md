@@ -243,6 +243,14 @@ Além disso, criar uma nova Request no postman, nesse caso será uma requisiçã
 <img src="https://i.imgur.com/qdrKhTe.png" alt="delete_postman" width="750"/>
 
 ---
-## Passo 
+## Passo 10: Implementar o método para atualizar o produto
+
+    @PutMapping("/{id}")
+    public void atualizar(@PathVariable("id") String id, @RequestBody Produto produto) {
+        produto.setId(id);
+        produtoRepository.save(produto);
+    }
+
+Essa requisição pe parecido com o post, usamos o método save tanto para salvar como para atualizar. 
 
      
