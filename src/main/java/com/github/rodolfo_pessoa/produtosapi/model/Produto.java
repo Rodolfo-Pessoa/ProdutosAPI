@@ -6,7 +6,6 @@ import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 
 //POJO -> Plain old Java Object
-
 @Entity
 @Table(name = "produto")
 public class Produto {
