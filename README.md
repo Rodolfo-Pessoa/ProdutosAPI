@@ -253,4 +253,34 @@ Além disso, criar uma nova Request no postman, nesse caso será uma requisiçã
 
 Essa requisição pe parecido com o post, usamos o método save tanto para salvar como para atualizar. 
 
-     
+## Passo 11: Implementar o método que acessa a lista de produtos
+
+Nesse caso, não precisamos de um método específico para listar os produtos, pois o Spring Data JPA já nos fornece um método para isso.
+
+    @GetMapping
+    public List<Produto> listar() {
+        return produtoRepository.findAll();
+    }
+
+No Postman, criamos uma nova Request, nesse caso será uma requisição GET para a rota /produtos;
+Mudamos o parâmetro para nome;
+Na bus por parâmetro a "?" é para definir qual parâmetro será usado, e o "=" é para definir o valor do parâmetro.
+O "&" serve para caso você queira adicionar mais de um parâmetro.
+
+Ex:
+http://localhost:8080/produtos?nome=NOME_DO_PARAMETRO&preco=PRECO_DO_PARAMETRO
+
+<img src="https://i.imgur.com/RPRIg2S.png" alt="listar_postman" width="750"/>
+
+Como não há a opção de buscar todos pelo nome, precisamos criar um método específico para isso lá no repositório:
+
+    List<Produto> findByNome(String nome);
+
+E no controller:
+
+    @GetMapping
+    public List<Produto> buscar(@RequestParam("nome") String nome) {
+        return produtoRepository.findByNome(nome);
+    }
+
+Agora, podemos buscar todos os produtos.
